@@ -17,21 +17,25 @@ import java.util.List;
 public class Offer {
     @XmlAttribute (name = "id")
     Integer id;
+    @XmlAttribute(name = "type")
+    String type;
     @XmlElement(name = "price")
-    double price;
-    @XmlElement(name = "purchase_price")
-    String purchasePrice;
-    @XmlElement(name = "currencyId")
-    String currencyId;
-    @XmlElement(name = "categoryId")
-    Integer categoryId;
+    Integer price;
+    @XmlElement(name = "RETAIL_PRICE")
+    String retailPrice;
+    @XmlElement(name = "CURRENCY_CODE")
+    String currencyCode;
+    @XmlElement(name = "GROUP_ID")
+    Integer groupID;
     @XmlElement(name = "url")
     String url;
-    @XmlElement(name = "vendorCode")
-    String vendorCode;
-    @XmlElement(name = "picture")
-    List<Pictures> pictures;
-    @XmlElement(name = "available")
+    @XmlElement(name = "vendorId")
+    String vendorId;
+    @XmlElement(name = "SMALL_IMAGE")
+    String smallImage;
+    @XmlElement(name = "PRODUCT_CARD")
+    String productCard;
+    @XmlAttribute(name = "available")
     Boolean available;
     @XmlElement(name = "quantity")
     Integer quantity;
@@ -43,6 +47,8 @@ public class Offer {
     String name;
     @XmlElement(name = "description")
     String description;
+    @XmlElement(name = "categoryId")
+    String categoryId;
     @XmlElement(name = "param")
     List<Params> params;
 }

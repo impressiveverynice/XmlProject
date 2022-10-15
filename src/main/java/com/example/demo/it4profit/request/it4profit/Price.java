@@ -1,4 +1,4 @@
-package com.example.demo.it4profit.request;
+package com.example.demo.it4profit.request.it4profit;
 
 import lombok.Getter;
 import lombok.Setter;

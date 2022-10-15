@@ -1,6 +1,5 @@
-package com.example.demo.it4profit.request;
+package com.example.demo.it4profit.request.it4profit;
 
-import com.example.demo.it4profit.OLDREQUEST.Product;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -8,7 +7,6 @@ import lombok.ToString;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
 import java.util.List;
 
 @Getter
