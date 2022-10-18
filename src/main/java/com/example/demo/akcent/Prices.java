@@ -8,5 +8,5 @@ import java.util.List;
 
 public class Prices {
     @XmlElement(name = "Prices")
-    List<Price> price;
+    private List<Price> price;
 }
