@@ -26,7 +26,7 @@ public class Parser {
 
     private static final List<String> urlList = new ArrayList<>();
     static {
-        urlList.add("https://services.it4profit.com/product/ru/720/PriceAvail.xml?USERNAME=ns_company&PASSWORD=NS_COMPANY123");
+        urlList.add("https://www.ak-cent.kz/export/Exchange/article_all/Ware0022.xml");
     }
 
     @Scheduled(fixedDelay = 1000000)
@@ -34,7 +34,7 @@ public class Parser {
         log.info("Downloading from URL");
         for(String url : urlList) {
             String xml = urlRequest(url);
-            String s = unMarshaller.it4profit(xml);
+            String s = unMarshaller.akcent(xml);
             System.out.println("Completed request to Satu");
         }
     }

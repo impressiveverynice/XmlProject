@@ -1,6 +1,6 @@
-package com.example.demo.akcent;
+package com.example.demo.azerti;
 
-import com.example.demo.it4profit.request.it4profit.Price;
+import com.example.demo.akcent.AkcentOffer;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -14,7 +14,7 @@ import java.util.List;
 @Setter
 @XmlAccessorType(XmlAccessType.FIELD)
 @ToString
-public class Offers {
+public class AzertiOffers {
     @XmlElement(name = "offer")
-    private List<Offer> offer;
+    private List<AkcentOffer> akcentOffer;
 }

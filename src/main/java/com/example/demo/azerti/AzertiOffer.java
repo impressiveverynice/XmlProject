@@ -12,7 +12,7 @@ import javax.xml.bind.annotation.XmlElement;
 @Getter
 @Setter
 @XmlAccessorType(XmlAccessType.FIELD)
-public class Offer {
+public class AzertiOffer {
     @XmlAttribute (name = "id")
     private String offerId;
     @XmlAttribute (name = "tnved")

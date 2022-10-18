@@ -17,6 +17,4 @@ public class Currency {
     private String currenciesId;
     @XmlAttribute (name = "rate")
     private Integer currencyRate;
-    @XmlAttribute (name = "plus")
-    private Integer currencyPlus;
 }

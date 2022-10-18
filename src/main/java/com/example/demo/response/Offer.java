@@ -16,11 +16,11 @@ import java.util.List;
 @ToString
 public class Offer {
     @XmlAttribute (name = "id")
-    Integer id;
+    String id;
     @XmlAttribute(name = "type")
     String type;
     @XmlElement(name = "price")
-    Integer price;
+    String price;
     @XmlElement(name = "RETAIL_PRICE")
     String retailPrice;
     @XmlElement(name = "CURRENCY_CODE")

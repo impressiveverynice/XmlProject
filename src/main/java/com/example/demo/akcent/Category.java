@@ -15,7 +15,7 @@ import javax.xml.bind.annotation.XmlValue;
 @ToString
 public class Category {
     @XmlAttribute (name = "id")
-    private String categoryId;
+    private String id;
     @XmlValue
-    private String categoryName;
+    private String value;
 }

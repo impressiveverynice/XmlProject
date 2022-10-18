@@ -1,22 +1,19 @@
 package com.example.demo.response;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
-import lombok.ToString;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
-import java.util.List;
 
 @XmlAccessorType(XmlAccessType.FIELD)
-@ToString
 @Getter
 @Setter
-@XmlRootElement(name = "offers")
-public class SatuOffers {
-
-    @XmlElement(name = "offer")
-    private List<Offer> offerList;
+@XmlRootElement(name = "yml_catalog")
+public class SatuResponse {
+    @XmlElement
+    private Shop shop = new Shop();
 }

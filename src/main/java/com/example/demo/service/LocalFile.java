@@ -10,7 +10,7 @@ import java.io.FileWriter;
 @Service
 public class LocalFile {
     public String createFile(String xml) throws Exception{
-        File file = new File("src\\main\\resources\\xml\\file2.xml");
+        File file = new File("src/main/resources/xml/file.xml");
         if(!file.exists()) file.createNewFile();
         FileWriter fw = new FileWriter(file.getAbsoluteFile(),false);
         fw.write(xml);
