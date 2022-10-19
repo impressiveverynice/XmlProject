@@ -26,6 +26,8 @@ import java.io.IOException;
 import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -85,8 +87,6 @@ public class UnMarshaller {
     }
 
     private SatuResponse azerti(String xml, SatuResponse response) throws Exception {
-//        xml = xml.substring(1);
-        System.out.println("first char: " + xml.substring(0, 10));
         log.info("Unmarshalling XML for azerti");
         JAXBContext context = JAXBContext.newInstance(Azerti.class);
         Unmarshaller unmarshaller = context.createUnmarshaller();
@@ -95,20 +95,20 @@ public class UnMarshaller {
         response.getShop().getCategoriesList().getCategoryList().addAll(unmarshalledObject.getShop().getCategories().getCategoryList());
         response.getShop().getCurrencies().getCurrencyList().addAll(unmarshalledObject.getShop().getCurrencies().getCurrencyList());
         List<Offer> offers = new ArrayList<>();
-        int counter = 0;
         for (AzertiOffer product : unmarshalledObject.getShop().getAzertiOffers().getAzertiOffer()) {
-            if(counter++ > 20) break;
             if (product.getCategoryId().isEmpty()) continue;
-            if (product.getPrice() == null) continue;
+            if (product.getPrice() == null || product.getPrice() < 1) continue;
+            if(product.getStock().isBlank() || Integer.parseInt(product.getStock()) < 1) continue;
+
             Offer offer = new Offer();
             offer.setId(product.getOfferId());
             offer.setAvailable(true);
-            offer.setPicture(getImageUrl(product.getName()));
             offer.setQuantityInStock(product.getStock());
             offer.setVendor(product.getVendor());
             offer.setVendorCode(product.getOfferTnved());
             offer.setProductCard(product.getOfferTnved());
-            offer.setName(product.getName());
+            offer.setName(product.getNameshot());
+            offer.setDescription(product.getName());
             offer.setType("");
             offer.setCurrencyCode(product.getCurrencyId());
             Double incrementPrice = product.getPrice() * 1.2;
@@ -116,12 +116,18 @@ public class UnMarshaller {
             offer.setCategoryId(product.getCategoryId());
             offers.add(offer);
         }
+       offers.parallelStream().forEach(offer -> {
+            try {
+                offer.setPicture(getImageUrl(offer.getName()));
+            }catch (Exception ex) {
+                log.info(ex.getMessage());
+            }
+        });
         response.getShop().getOffers().getOfferList().addAll(offers);
         return response;
     }
 
     private SatuResponse it4profit(String xml, SatuResponse response) throws Exception {
-//        xml = xml.substring(1);
         System.out.println("first char: " + xml.substring(0, 10));
         log.info("Unmarshalling XML for it4profit");
         JAXBContext context = JAXBContext.newInstance(It4profit.class);
@@ -132,6 +138,8 @@ public class UnMarshaller {
         List<Offer> offers = new ArrayList<>();
         List<Category> categoryList = new ArrayList<>();
         for (Price product : unmarshalledObject.getPrices().getPrice()) {
+            if(product.getDescription().isEmpty()) continue;
+            if(product.getMyPrice() == 0) continue;
             Category category = new Category();
             category.setId(String.valueOf(product.getGroupId()));
             category.setValue(product.getGroupName());
@@ -159,8 +167,9 @@ public class UnMarshaller {
         return response;
     }
     public String getImageUrl(String img) throws IOException {
+        log.info("Looking for image for : " + img);
         img = img.replace(" ", "%20");
-            Document document = Jsoup.connect("https://google.com/search?tbm=isch&q="+img).userAgent("Mozilla").get();
+        Document document = Jsoup.connect("https://google.com/search?tbm=isch&q="+img).userAgent("Mozilla").get();
         Elements imgList = document.getElementsByTag("img");
         List<String> images = new ArrayList<>();
         for(Element el : imgList) {

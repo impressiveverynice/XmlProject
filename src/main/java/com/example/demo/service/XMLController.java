@@ -14,8 +14,8 @@ public class XMLController {
 
     @GetMapping(produces = "text/xml")
     public String getXml() throws Exception{
-        Path filename = Path.of("src\\main\\resources\\xml\\file.xml");
-        String rsp = Files.readString(filename);
+//        Path filename = Path.of("src\\main\\resources\\xml\\file.xml");
+//        String rsp = Files.readString(filename);
         return file.getFile();
     }
 }

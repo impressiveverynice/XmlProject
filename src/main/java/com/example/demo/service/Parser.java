@@ -37,7 +37,7 @@ public class Parser {
 
 
 
-    @Scheduled(fixedDelay = 1000000)
+    @Scheduled(fixedDelay = 36000000)
     public void parse() throws Exception{
         log.info("Downloading from URL");
         SatuResponse response = new SatuResponse();

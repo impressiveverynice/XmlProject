@@ -23,6 +23,8 @@ public class AzertiOffer {
     private Boolean offerAvailable;
     @XmlElement (name = "name")
     private String name;
+    @XmlElement (name = "nameshot")
+    private String nameshot;
     @XmlElement (name = "stock")
     private String stock;
     @XmlElement (name = "price")
