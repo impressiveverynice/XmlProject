@@ -15,9 +15,9 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement(name = "shop")
 public class Shop {
     @XmlElement(name = "currencies")
-    private Currencies currencies;
+    private Currencies currencies = new Currencies();
     @XmlElement(name = "categories")
-    private Categories categoriesList;
+    private Categories categoriesList = new Categories();
     @XmlElement(name = "offers")
-    private SatuOffers offers;
+    private SatuOffers offers = new SatuOffers();
 }

@@ -7,6 +7,7 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import java.util.ArrayList;
 import java.util.List;
 
 @XmlAccessorType(XmlAccessType.FIELD)
@@ -14,6 +15,6 @@ import java.util.List;
 @Setter
 public class Currencies {
     @XmlElement(name = "currency")
-    List<Currency> currencyList;
+    List<Currency> currencyList = new ArrayList<>();
 
 }

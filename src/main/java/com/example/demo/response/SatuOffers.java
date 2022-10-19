@@ -8,6 +8,7 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import java.util.ArrayList;
 import java.util.List;
 
 @XmlAccessorType(XmlAccessType.FIELD)
@@ -18,5 +19,5 @@ import java.util.List;
 public class SatuOffers {
 
     @XmlElement(name = "offer")
-    private List<Offer> offerList;
+    private List<Offer> offerList = new ArrayList<>();
 }

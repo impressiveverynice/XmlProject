@@ -1,6 +1,8 @@
 package com.example.demo.azerti;
 
 import com.example.demo.akcent.AkcentOffers;
+import com.example.demo.response.Categories;
+import com.example.demo.response.Currencies;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -15,5 +17,9 @@ import javax.xml.bind.annotation.XmlElement;
 @ToString
 public class Shop {
     @XmlElement(name = "offers")
-    private AkcentOffers akcentOffers;
+    private AzertiOffers azertiOffers;
+    @XmlElement(name = "categories")
+    private Categories categories;
+    @XmlElement(name = "currencies")
+    private Currencies currencies;
 }

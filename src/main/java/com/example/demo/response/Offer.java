@@ -31,8 +31,8 @@ public class Offer {
     String url;
     @XmlElement(name = "vendorId")
     String vendorId;
-    @XmlElement(name = "SMALL_IMAGE")
-    String smallImage;
+    @XmlElement(name = "picture")
+    String picture;
     @XmlElement(name = "PRODUCT_CARD")
     String productCard;
     @XmlAttribute(name = "available")
@@ -43,6 +43,8 @@ public class Offer {
     String quantityInStock;
     @XmlElement(name = "vendor")
     String vendor;
+    @XmlElement(name = "vendorCode")
+    String vendorCode;
     @XmlElement(name = "name")
     String name;
     @XmlElement(name = "description")

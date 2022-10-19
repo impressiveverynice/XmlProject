@@ -1,6 +1,5 @@
 package com.example.demo.azerti;
 
-import com.example.demo.akcent.AkcentOffer;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -16,5 +15,5 @@ import java.util.List;
 @ToString
 public class AzertiOffers {
     @XmlElement(name = "offer")
-    private List<AkcentOffer> akcentOffer;
+    private List<AzertiOffer> azertiOffer;
 }
