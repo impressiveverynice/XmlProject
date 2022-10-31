@@ -24,4 +24,8 @@ public class MarcomOffer {
     private String categoryId;
     @XmlElement(name = "prices")
     private Prices prices;
+    @XmlElement(name = "Offer_ID")
+    private String offerId;
+    @XmlElement(name = "vendor")
+    private String vendor;
 }

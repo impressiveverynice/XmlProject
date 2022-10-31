@@ -7,6 +7,8 @@ import com.example.demo.azerti.AzertiOffer;
 import com.example.demo.it4profit.request.it4profit.It4profit;
 import com.example.demo.it4profit.request.it4profit.Price;
 import com.example.demo.it4profit.request.it4profit.Prices;
+import com.example.demo.marcom.Marcom;
+import com.example.demo.marcom.MarcomOffer;
 import com.example.demo.response.Category;
 import com.example.demo.response.Offer;
 import com.example.demo.response.SatuOffers;
@@ -36,7 +38,6 @@ public class UnMarshaller {
     private final Marshaller marshal;
 
     public SatuResponse generateObject(SatuResponse response, String xml, int provider) throws Exception {
-        if(provider != 2) xml = xml.substring(1);
         if(provider == 0) {
              response = akcent(xml, response);
         }
@@ -46,12 +47,14 @@ public class UnMarshaller {
         if(provider == 2) {
             response = it4profit(xml, response);
         }
+        if(provider == 3) {
+            response = marcom(xml, response);
+        }
         return response;
-//        return marshal.marshal(response.getShop());
     }
 
     private SatuResponse akcent(String xml, SatuResponse response) throws Exception {
-//        xml = xml.substring(1);
+        xml = xml.substring(1);
         System.out.println("first char: " + xml.substring(0, 10));
         log.info("Unmarshalling XML for akcent");
         JAXBContext context = JAXBContext.newInstance(Akcent.class);
@@ -88,6 +91,7 @@ public class UnMarshaller {
 
     private SatuResponse azerti(String xml, SatuResponse response) throws Exception {
         log.info("Unmarshalling XML for azerti");
+        xml.substring(1);
         JAXBContext context = JAXBContext.newInstance(Azerti.class);
         Unmarshaller unmarshaller = context.createUnmarshaller();
         StringReader sr = new StringReader(xml);
@@ -166,6 +170,48 @@ public class UnMarshaller {
         response.getShop().getOffers().getOfferList().addAll(offers);
         return response;
     }
+
+    private SatuResponse marcom(String xml, SatuResponse response) throws Exception {
+        log.info("Unmarshalling XML for marcom");
+        xml = xml.substring(1);
+        JAXBContext context = JAXBContext.newInstance(Marcom.class);
+        Unmarshaller unmarshaller = context.createUnmarshaller();
+        StringReader sr = new StringReader(xml);
+        Marcom unmarshalledObject = (Marcom) unmarshaller.unmarshal(sr);
+        response.getShop().getCategoriesList().getCategoryList().addAll(unmarshalledObject.getShop().getCategories().getCategoryList());
+        response.getShop().getCurrencies().getCurrencyList().addAll(unmarshalledObject.getShop().getCurrencies().getCurrencyList());
+        List<Offer> offers = new ArrayList<>();
+        for (MarcomOffer product : unmarshalledObject.getShop().getMarcomOffers().getMarcomOffer()) {
+            if (product.getCategoryId().isEmpty()) continue;
+            if (product.getPrices().getPrice().get(0) == null
+                    || product.getPrices().getPrice().get(0).getValue() < 1) continue;
+            Offer offer = new Offer();
+            offer.setId(product.getOfferId());
+            offer.setAvailable(true);
+            offer.setQuantityInStock(product.getStock());
+            offer.setVendor(product.getVendor());
+            offer.setVendorCode(product.getOfferId());
+            offer.setName(product.getName());
+            offer.setDescription(product.getName());
+            offer.setType("");
+            offer.setCurrencyCode("KZT");
+            Double incrementPrice = product.getPrices().getPrice().get(0).getValue() * 1.2;
+            offer.setPrice(String.format("%.0f", incrementPrice));
+            offer.setCategoryId(product.getCategoryId());
+            offers.add(offer);
+        }
+        offers.parallelStream().forEach(offer -> {
+            try {
+                offer.setPicture(getImageUrl(offer.getName()));
+            }catch (Exception ex) {
+                log.info(ex.getMessage());
+            }
+        });
+        response.getShop().getOffers().getOfferList().addAll(offers);
+        return response;
+    }
+
+
     public String getImageUrl(String img) throws IOException {
         log.info("Looking for image for : " + img);
         img = img.replace(" ", "%20");

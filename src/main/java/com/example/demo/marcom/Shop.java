@@ -17,7 +17,7 @@ import javax.xml.bind.annotation.XmlElement;
 @ToString
 public class Shop {
     @XmlElement(name = "offers")
-    private AzertiOffers azertiOffers;
+    private MarcomOffers marcomOffers;
     @XmlElement(name = "categories")
     private Categories categories;
     @XmlElement(name = "currencies")

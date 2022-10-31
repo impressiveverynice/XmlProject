@@ -1,6 +1,5 @@
 package com.example.demo.marcom;
 
-import com.example.demo.azerti.Shop;
 import lombok.Getter;
 import lombok.Setter;
 
