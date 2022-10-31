@@ -1,5 +1,6 @@
-package com.example.demo.azerti;
+package com.example.demo.marcom;
 
+import com.example.demo.azerti.Currency;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;

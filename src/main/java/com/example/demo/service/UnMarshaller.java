@@ -105,7 +105,7 @@ public class UnMarshaller {
             offer.setAvailable(true);
             offer.setQuantityInStock(product.getStock());
             offer.setVendor(product.getVendor());
-            offer.setVendorCode(product.getOfferTnved());
+            offer.setVendorCode(product.getOfferId());
             offer.setProductCard(product.getOfferTnved());
             offer.setName(product.getNameshot());
             offer.setDescription(product.getName());
@@ -150,9 +150,9 @@ public class UnMarshaller {
             offer.setAvailable(true);
             offer.setUrl(product.getProductCard());
             offer.setPicture(product.getSmallImage());
-            offer.setQuantityInStock(String.valueOf(100));
+            offer.setQuantityInStock(String.valueOf(product.getAvail()));
             offer.setVendor(product.getVendorName());
-            offer.setVendorCode(String.valueOf(product.getVendorId()));
+            offer.setVendorCode(product.getWic());
             offer.setProductCard(product.getEan());
             offer.setName(product.getDescription());
             offer.setType(product.getGroupName());
