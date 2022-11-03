@@ -47,19 +47,16 @@ public class UnMarshaller {
         if(provider == 2) {
             response = it4profit(xml, response);
         }
-        if(provider == 3) {
-            response = marcom(xml, response);
-        }
+
         return response;
     }
 
     private SatuResponse akcent(String xml, SatuResponse response) throws Exception {
-        xml = xml.substring(1);
-        System.out.println("first char: " + xml.substring(0, 10));
+        String customXml = xml.substring(1);
         log.info("Unmarshalling XML for akcent");
         JAXBContext context = JAXBContext.newInstance(Akcent.class);
         Unmarshaller unmarshaller = context.createUnmarshaller();
-        StringReader sr = new StringReader(xml);
+        StringReader sr = new StringReader(customXml);
         Akcent unmarshalledObject = (Akcent) unmarshaller.unmarshal(sr);
         response.getShop().getCategoriesList().getCategoryList().addAll(unmarshalledObject.getShop().getCategories().getCategoryList());
         response.getShop().getCurrencies().getCurrencyList().addAll(unmarshalledObject.getShop().getCurrencies().getCurrencyList());
@@ -91,10 +88,10 @@ public class UnMarshaller {
 
     private SatuResponse azerti(String xml, SatuResponse response) throws Exception {
         log.info("Unmarshalling XML for azerti");
-        xml.substring(1);
+        String customXml = xml.substring(1);
         JAXBContext context = JAXBContext.newInstance(Azerti.class);
         Unmarshaller unmarshaller = context.createUnmarshaller();
-        StringReader sr = new StringReader(xml);
+        StringReader sr = new StringReader(customXml);
         Azerti unmarshalledObject = (Azerti) unmarshaller.unmarshal(sr);
         response.getShop().getCategoriesList().getCategoryList().addAll(unmarshalledObject.getShop().getCategories().getCategoryList());
         response.getShop().getCurrencies().getCurrencyList().addAll(unmarshalledObject.getShop().getCurrencies().getCurrencyList());
@@ -173,10 +170,10 @@ public class UnMarshaller {
 
     private SatuResponse marcom(String xml, SatuResponse response) throws Exception {
         log.info("Unmarshalling XML for marcom");
-        xml = xml.substring(1);
+        String customXml = xml.substring(1);
         JAXBContext context = JAXBContext.newInstance(Marcom.class);
         Unmarshaller unmarshaller = context.createUnmarshaller();
-        StringReader sr = new StringReader(xml);
+        StringReader sr = new StringReader(customXml);
         Marcom unmarshalledObject = (Marcom) unmarshaller.unmarshal(sr);
         response.getShop().getCategoriesList().getCategoryList().addAll(unmarshalledObject.getShop().getCategories().getCategoryList());
         response.getShop().getCurrencies().getCurrencyList().addAll(unmarshalledObject.getShop().getCurrencies().getCurrencyList());
@@ -195,7 +192,7 @@ public class UnMarshaller {
             offer.setDescription(product.getName());
             offer.setType("");
             offer.setCurrencyCode("KZT");
-            Double incrementPrice = product.getPrices().getPrice().get(0).getValue() * 1.2;
+            Double incrementPrice = product.getPrices().getPrice().get(0).getValue() * 1.15;
             offer.setPrice(String.format("%.0f", incrementPrice));
             offer.setCategoryId(product.getCategoryId());
             offers.add(offer);

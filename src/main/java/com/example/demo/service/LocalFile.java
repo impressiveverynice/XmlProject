@@ -14,11 +14,11 @@ public class LocalFile {
     private String file;
     public String createFile(String xml) throws Exception{
         file = xml;
-        File file = new File("/file.xml");
-        if(!file.exists()) file.createNewFile();
-        FileWriter fw = new FileWriter(file.getAbsoluteFile(),false);
-        fw.write(xml);
-        fw.close();
+//        File file = new File("/file.xml");
+//        if(!file.exists()) file.createNewFile();
+//        FileWriter fw = new FileWriter(file.getAbsoluteFile(),false);
+//        fw.write(xml);
+//        fw.close();
         return "";
     }
 }

@@ -16,6 +16,7 @@ import java.io.StringReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,7 +34,7 @@ public class Parser {
         urlList.add("https://www.ak-cent.kz/export/Exchange/article_all/Ware0022.xml");
         urlList.add("https://shop.azerti.kz/price/import.xml");
         urlList.add("https://services.it4profit.com/product/ru/720/PriceAvail.xml?USERNAME=ns_company&PASSWORD=NS_COMPANY123");
-        urlList.add("https://db.marcom-dc.com:8443/cache/marcom_web_exe/lrKYgVkHZ610B6BEE06/$$$/info@yellowmarket_marcom_pl_20221031.xml");
+        //zdes bil ruslan
     }
 
 
